@@ -27,7 +27,7 @@ function message() {
   if [ ! -d "install_log" ]; then
     mkdir "install_log"
   fi
-  wget https://raw.githubusercontent.com/ImagicalMine/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
+  wget https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
   . language/$o.sh
 }
 
@@ -97,7 +97,7 @@ w="install_log/log_wget"
 wp="install_log/log_wget_php"
 
 	echo $im_install_echo
-	wget https://github.com/ImagicalMine/ImagicalMine/archive/master.zip >>./$w 2>>./$w
+	wget https://github.com/ImagicalCorp/ImagicalMine/archive/master.zip >>./$w 2>>./$w
 	chmod 777 master.zip >>./$l 2>>./$le
 	unzip -o master.zip >>./$l 2>>./$le
 	chmod 777 ImagicalMine-master >>./$l 2>>./$le
@@ -107,9 +107,9 @@ wp="install_log/log_wget_php"
 	cd .. >>../$l 2>>../$le
 	rm -rf ImagicalMine-master >>./$l 2>>./$le
 	rm -rf master.zip >>./$l 2>>./$le
-        wget --no-check-certificate https://raw.githubusercontent.com/ImagicalMine/ImagicalMine/master/start.sh >>./$l 2>>./$le
+        wget --no-check-certificate https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/start.sh >>./$l 2>>./$le
         chmod 777 start.sh >>./$l 2>>./$le
-        wget --no-check-certificate https://raw.githubusercontent.com/ImagicalMine/ImagicalMine/master/LICENSE.md >>./$l 2>>./$le
+        wget --no-check-certificate https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/LICENSE.md >>./$l 2>>./$le
 	echo
 	echo $php_install_echo
 if [ "$z" == "RPI2" ];then
