@@ -54,7 +54,7 @@ echo "system> Please choose which language you want to use during the installati
 echo "system>   1) English"
 echo "system>   2) German"
 echo "system>   3) Exit ImagicalMine installation"
-read -e -p "system> Number (e.g. 1): " k
+# read -e -p "system> Number (e.g. 1): " k
 read -e -p "system> Number (e.g. 1): " k </dev/tty
  case "$k" in 
 	1 ) o="en"; message "en";;
@@ -76,7 +76,7 @@ echo $mac_32
 echo $mac_64
 echo $rpi2
 echo $exit1
-read -e -p "$no_selection" a
+# read -e -p "$no_selection" a
 read -e -p "$no_selection" a </dev/tty
  case "$a" in 
 	1 ) z="PHP_7.0.2_x86_Linux.tar.gz";;
@@ -126,9 +126,10 @@ wp="install_log/log_wget_php"
 	echo
 	echo $php_install_echo
 	if [ "$z" == "RPI2" ];then
-        wget --no-check-certificate http://forums.imagicalmine.net/bin.zip >>./$wp 2>>./$wp
-        unzip bin.zip >>./$lp 2>>./$lpe
-        rm -r bin.zip >>./$lp 2>>./$lpe
+        wget --no-check-certificate https://raw.githubusercontent.com/keithkfng/my-files-and-icons/master/raspberry_php.tar.gz >>./$wp 2>>./$wp
+        chmod 777 rasp* >>./$lp 2>>./$lpe
+	tar zxvf rasp* >>./$lp 2>>./$lpe
+	rm -r rasp* >>./$lp 2>>./$lpe
 	else
 	if ["$z" == "PHP_7.0.2_x86_Linux.tar.gz"]
 	curl -O --insecure https://bintray.com/artifact/download/pocketmine/PocketMine/$z >>./$wp 2>>./$wp
@@ -145,7 +146,7 @@ wp="install_log/log_wget_php"
         echo $loop_prompt
         echo $yes
         echo $no
-        read -e -p "$no_selection" t
+        # read -e -p "$no_selection" t
         read -e -p "$no_selection" t </dev/tty
         case "$t" in
 	1 ) c="y";;
