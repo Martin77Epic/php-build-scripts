@@ -27,7 +27,7 @@ function message() {
   if [ ! -d "install_log" ]; then
     mkdir "install_log"
   fi
-  curl -O https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
+  curl -O language/$o.sh https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh >>./$l 2>>./$le
   wget https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
   . language/$o.sh
 }
