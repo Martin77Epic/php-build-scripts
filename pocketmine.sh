@@ -27,9 +27,9 @@ function message() {
   if [ ! -d "install_log" ]; then
     mkdir "install_log"
   fi
-  curl -O language/pm/$o.sh https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/pm/$o.sh  >>./$l 2>>./$le
-  wget https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/pm/$o.sh -O language/pm/$o.sh >>./$l 2>>./$le
-  . language/$o.sh
+  curl -O language/en.sh https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/pm/en.sh  >>./$l 2>>./$le
+  wget https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/pm/en.sh -O language/en.sh >>./$l 2>>./$le
+  . language/en.sh
 }
 
 while :
@@ -46,25 +46,7 @@ ____            _        _   __  __ _                  __  __ ____
 EOF
 
 echo "system> Welcome to the PocketMine installer!"
-echo "system> If your language is not listed below, feel free to fork the ImagicalCorp/php-build-scripts repository on GitHub and translate it for us, then make a pull request so this installer includes your language."
-echo "system> Please choose which language you want to use during the installation:"
-echo "system>   1) English"
-echo "system>   2) German"
-echo "system>   3) Exit PocketMine installation"
-# read -e -p "system> Number (e.g. 1): " k
-read -e -p "system> Number (e.g. 1): " k </dev/tty
- case "$k" in 
-	1 ) o="en"; message "en";;
-	2 ) o="de"; message "de";;
-        3 ) exit 1;;
-        * ) echo "error> An unexpected error occurred - you entered an unknown selection. Restart the script, and then choose again."; exit 1;;
- esac
-
-# this is how to call the function message and pass the input(selected langugae) as argument
-# message "en"
-# echo $message_hello_world
-echo
-echo $language_selected
+echo "system> This installer will guide you through installing PocketMine for your server!"
 echo
 echo $php_prompt
 echo $linux_32
