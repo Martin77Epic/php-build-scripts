@@ -27,6 +27,7 @@ function message() {
   if [ ! -d "install_log" ]; then
     mkdir "install_log"
   fi
+  curl -O https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
   wget https://raw.githubusercontent.com/ImagicalCorp/php-build-scripts/master/language/$o.sh -O language/$o.sh >>./$l 2>>./$le
   . language/$o.sh
 }
@@ -51,16 +52,14 @@ echo "system> Welcome to the ImagicalMine installer!"
 echo "system> If your language is not listed below, feel free to fork the ImagicalMine/php-build-scripts repository on GitHub and translate it for us, then make a pull request so this installer includes your language."
 echo "system> Please choose which language you want to use during the installation:"
 echo "system>   1) English"
-echo "system>   2) Chinese"
-echo "system>   3) German"
-echo "system>   4) Exit ImagicalMine installation"
+echo "system>   2) German"
+echo "system>   3) Exit ImagicalMine installation"
 read -e -p "system> Number (e.g. 1): " k
 read -e -p "system> Number (e.g. 1): " k </dev/tty
  case "$k" in 
 	1 ) o="en"; message "en";;
-	2 ) o="ch"; message "ch";;
-        3 ) o="de"; message "de";;
-        4 ) exit 1;;
+	2 ) o="de"; message "de";;
+        3 ) exit 1;;
         * ) echo "error> An unexpected error occurred - you entered an unknown selection. Restart the script, and then choose again."; exit 1;;
  esac
 
@@ -97,7 +96,13 @@ w="install_log/log_wget"
 wp="install_log/log_wget_php"
 
 	echo $im_install_echo
+	if ["$z" == "PHP_7.0.2_x86_Linux.tar.gz"]
+	curl -O https://github.com/ImagicalCorp/ImagicalMine/archive/master.zip >>./$w 2>>./$w
+	elif ["$z" == "PHP_7.0.2_x86-64_Linux.tar.gz"]
 	wget https://github.com/ImagicalCorp/ImagicalMine/archive/master.zip >>./$w 2>>./$w
+	else
+	curl -O https://github.com/ImagicalCorp/ImagicalMine/archive/master.zip >>./$w 2>>./$w
+	fi
 	chmod 777 master.zip >>./$l 2>>./$le
 	unzip -o master.zip >>./$l 2>>./$le
 	chmod 777 ImagicalMine-master >>./$l 2>>./$le
@@ -107,21 +112,35 @@ wp="install_log/log_wget_php"
 	cd .. >>../$l 2>>../$le
 	rm -rf ImagicalMine-master >>./$l 2>>./$le
 	rm -rf master.zip >>./$l 2>>./$le
+	if ["$z" == "PHP_7.0.2_x86_Linux.tar.gz"]
+	curl -O --insecure https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/start.sh >>./$l 2>>./$le
+	curl -O --insecure https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/LICENSE.md >>./$l 2>>./$le
+	elif ["$z" == "PHP_7.0.2_x86-64_Linux.tar.gz"]
+	curl -O --insecure https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/start.sh >>./$l 2>>./$le
+	curl -O --insecure https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/LICENSE.md >>./$l 2>>./$le
+	else
         wget --no-check-certificate https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/start.sh >>./$l 2>>./$le
-        chmod 777 start.sh >>./$l 2>>./$le
         wget --no-check-certificate https://raw.githubusercontent.com/ImagicalCorp/ImagicalMine/master/LICENSE.md >>./$l 2>>./$le
+        fi
+        chmod 777 start.sh >>./$l 2>>./$le
 	echo
 	echo $php_install_echo
-if [ "$z" == "RPI2" ];then
+	if [ "$z" == "RPI2" ];then
         wget --no-check-certificate http://forums.imagicalmine.net/bin.zip >>./$wp 2>>./$wp
         unzip bin.zip >>./$lp 2>>./$lpe
         rm -r bin.zip >>./$lp 2>>./$lpe
-else
-wget --no-check-certificate https://bintray.com/artifact/download/pocketmine/PocketMine/$z >>./$wp 2>>./$wp
+	else
+	if ["$z" == "PHP_7.0.2_x86_Linux.tar.gz"]
+	curl -O --insecure https://bintray.com/artifact/download/pocketmine/PocketMine/$z >>./$wp 2>>./$wp
+	elif ["$z" == "PHP_7.0.2_x86-64_Linux.tar.gz"]
+	curl -O --insecure https://bintray.com/artifact/download/pocketmine/PocketMine/$z >>./$wp 2>>./$wp
+	else
+	wget --no-check-certificate https://bintray.com/artifact/download/pocketmine/PocketMine/$z >>./$wp 2>>./$wp
+	fi
 	chmod 777 PHP* >>./$lp 2>>./$lpe
 	tar zxvf PHP* >>./$lp 2>>./$lpe
 	rm -r PHP* >>./$lp 2>>./$lpe
-fi
+	fi
 	echo
         echo $loop_prompt
         echo $yes
